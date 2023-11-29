@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
+    />
+
+</head>
+<body>
+    <div class="background-container"></div>
+    <header>
+        <h2 class="logo">Logo</h2>
+        <nav class="navigation">
+            <a href="file:///Users/elif/Desktop/Midterm/home.html" class="btn">Home</a>
+            <a href="file:///Users/elif/Desktop/Midterm/categories.html">Categories</a>
+            <a href="file:///Users/elif/Desktop/Midterm/about.html">About</a>
+            <a href="file:///Users/elif/Desktop/Midterm/contact.html">Contact</a>
+
+        </nav>
+
+    </header>
+
+    <section class="container">
+
+        <label1>Education Appointment Form</label1>
+
+        <form action="#" class="form">
+
+            <div class="input-box">
+                <label>Title</label> 
+                <input type="text" id="title"placeholder="Title" required/>
+            </div>
+        </form>
+
+        <form action="#" class="form">
+            <div class="input-box">
+                <label>Name</label> 
+                <input type="text" id="name" placeholder="Your Name" required/>
+            </div>
+        </form>
+
+        <form action="#" class="form">
+            <div class="input-box">
+                <label for="email">Email</label> 
+                <input type="text" id="email" name="email" placeholder="Email" required/>
+            </div>
+        </form>
+
+        <form action="#" class="form">
+            <div class="input-box">
+                <label>Phone Number </label> 
+                <input type="number" id="number" placeholder="Phone Number (5**)" required/>
+            </div>
+        </form>
+        
+        <div class = "select-option">
+            <label>Course</label> 
+            <select class="form-select" id="dropdownListCourse" aria-label="Default select example">
+                <option selected >Select Course</option>
+            </select>
+        </div>
+
+        <div class = "select-option">
+            <label>City</label> 
+            <select class="form-select2" id="dropdownList" aria-label="Default select example">
+                <option selected >Select City</option>
+            </select>
+        </div>
+        
+
+        <div class = "select-option">
+            <label2>How would you like to be located? </label2>
+            <label></label> 
+            <select class="form-select" aria-label="Default select example">
+                <option selected >By phone</option>
+                <option >By mail</option>
+            </select>
+        </div>
+
+        <div class = "select-option">
+            <label></label> 
+            <select class="form-select" aria-label="Default select example">
+                <option selected >Hours 8am - 10pm</option>
+                <option >Hours 12pm - 4pm</option>
+            </select>
+        </div>
+
+        <form action="#" class="checkbox">
+            <input type="checkbox" id="term">
+            <label"> I agree to the Terms and Conditions </label><br>
+        </form>
+
+        <form action="#" class="form">
+            <div class="button">
+               <button type="button" onclick="kontrol()">Request an Appointment</button> 
+            </div>
+        </form>
+
+
+
+        <p class="result" id="result"></p>
+        <p class="result" id="result1"></p>
+        <p class="result" id="result2"></p>
+        <p class="result" id="result3"></p>
+        <!--<p class="result" id="result4"></p> -->
+
+        <script>
+            async function fetchDataAndPopulateDropdown() {
+                try {
+                    
+                    const response = await fetch("https://run.mocky.io/v3/d44d5d18-a90a-4797-bd28-d4fa4ff2fd57");
+        
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+        
+                    
+                    const responseData = await response.text();
+        
+                    console.log("Raw Response Data:", responseData);
+        
+                    const jsonMatches = responseData.match(/\{.*\}/g);
+        
+                    if (!jsonMatches) {
+                        throw new Error("No valid JSON content found in the response.");
+                    }
+        
+                   
+                    const data = jsonMatches.map(jsonString => JSON.parse(jsonString));
+        
+                    
+                    console.log("Parsed Data:", data);
+        
+                   
+                    const dropdown = document.getElementById("dropdownList");
+        
+                    
+                    data.forEach(item => {
+                        const option = document.createElement("option");
+                        option.value = item.id; 
+                        option.text = item.name;
+                        dropdown.appendChild(option); 
+                    });
+        
+                } catch (error) {
+                    console.error("Error fetching data:", error.message);
+                }
+            }
+        
+            async function fetchDataAndPopulateDropdownCourse() {
+                try {
+                    
+                    const response = await fetch("https://run.mocky.io/v3/f9dcfdbc-93eb-422f-a4bd-4014c67b1835");
+        
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+        
+                    
+                    const responseData = await response.text();
+        
+                    console.log("Raw Response Data:", responseData);
+        
+                    const jsonMatches = responseData.match(/\{.*\}/g);
+        
+                    if (!jsonMatches) {
+                        throw new Error("No valid JSON content found in the response.");
+                    }
+        
+                    
+                    const data = jsonMatches.map(jsonString => JSON.parse(jsonString));
+        
+                    
+                    console.log("Parsed Data:", data);
+        
+                   
+                    const dropdown = document.getElementById("dropdownListCourse");
+        
+                    
+                    data.forEach(item => {
+                        const option = document.createElement("option");
+                        option.value = item.id; 
+                        option.text = item.name; 
+                        dropdown.appendChild(option); 
+                    });
+        
+                } catch (error) {
+                    console.error("Error fetching data:", error.message);
+                }
+            }
+        
+            
+            window.onload = async function () {
+                await fetchDataAndPopulateDropdown();
+                fetchDataAndPopulateDropdownCourse();
+            };
+        </script>
+        
+    </section>
+
+    <script src="script.js" ></script>
+    
+</body>
+</html>
+
+    
+
+    
