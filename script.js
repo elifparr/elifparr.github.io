@@ -45,7 +45,7 @@ function kontrol() {
     }else if (checkbox.checked != true){
         text3 = "Please agree Terms and Conditions!"
     } else{
-        window.location.href = "https://github.com/elifparr/elifparr.github.io/blob/a98e1ba2fda5d5f244e06013c8e39246d399adf0/index2.html";
+        window.location.href = "index2.html";
     }
 
 
