@@ -45,7 +45,7 @@ function kontrol() {
     }else if (checkbox.checked != true){
         text3 = "Please agree Terms and Conditions!"
     } else{
-        window.location.href = "file:///Users/elif/Desktop/Midterm/index2.html";
+        window.location.href = "index2.html";
     }
 
 
